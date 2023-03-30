@@ -1,9 +1,28 @@
-<h4>My favorite fruits</h4>
-<ul class="fruits">
-  <li *ngFor="let fruit of fruits">
-    <button type="button">
-      <span class="badge">{{fruit.id}}</span>
-      <span class="name">{{fruit.name}}</span>
-    </button>
-  </li>
-</ul>
+<div class="container">
+  <h4>My favorite fruits</h4>
+  <ul class="fruits">
+    <li *ngFor="let fruit of fruits">
+      <button
+        type="button"
+        [class.selected]="fruit === selectedFruit"
+        (click)="onSelect(fruit)"
+      >
+        <span class="badge">{{ fruit.id }}</span>
+        <span class="name">{{ fruit.name }}</span>
+      </button>
+    </li>
+  </ul>
+
+  <div *ngIf="selectedFruit">
+    <h2>{{ selectedFruit.name | uppercase }} Details</h2>
+    <div>Id: {{ selectedFruit.id }}</div>
+    <div>
+      <label for="fruit-name">Fruit name: </label>
+      <input
+        id="fruit-name"
+        [(ngModel)]="selectedFruit.name"
+        placeholder="name"
+      />
+    </div>
+  </div>
+</div>
